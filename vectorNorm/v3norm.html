@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.center {
+  text-align:center;
+}
+</style>
+</head>
+
+<body> 
+<h2 class='center'>
+Input a 3-Vector
+</h2>
+<hr>
+<div class='center'>
+v[0]: <input id='v0' style='width:80px'> <br><br>
+v[1]: <input id='v1' style='width:80px'> <br><br>
+v[2]: <input id='v2' style='width:80px'> <br><br>
+<button id='calc'>
+norm =
+</button>
+<input id='norm' style='width:120px'>
+</div>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+/*
+function getPos () {
+	// Call api 
+	// Need to be replaced by a public ip address
+	
+	$.get( "http://127.0.0.1:1337/api?K=4&t="+ theta, function( data ) {
+		if(data && data.output){
+			var coords = data.output.split (" ");
+			disc.position.set (10*coords[0], 10*coords[1], 0.0);
+			//console.log (theta + ": " + coords[0] + ", " + coords[1]);
+		}
+	});
+}
+*/			
+$('#calc').click ( function() {
+
+	var x0 = $('#v0').val() || 0;
+	var x1 = $('#v1').val() || 0;
+	var x2 = $('#v2').val() || 0;
+  
+  	var param = { v:[x0, x1, x2] };
+  	//console.log (param);
+  	var outputStr = jQuery.param (param);
+  	console.log (outputStr);
+  	
+ 	$.get( "http://127.0.0.1:1337/api?"+outputStr, function( data ) {
+		if(data && data.output){
+		
+			console.log (data.output);
+			$('#norm').val ( data.output ); 
+		}
+	}); 	
+
+
+  // $('#norm').val ( Math.sqrt ( x0*x0 + x1*x1 + x2*x2 ) );
+  
+});
+
+</script>
+</body>
+
+</html>

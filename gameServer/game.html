@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+.center {
+	text-align: center;
+}
+.mid-font {
+	font-size: 1.5em
+}
+</style>
+</head>
+
+<body> 
+<h1 class='center'> Action Prediction </h1>
+<hr>
+<div class='center'>
+<input id='winsPerTen' style='width:80px' class='mid-font'> <span class='mid-font'> / 10</span>
+<br><br>
+<button id="submit" class='mid-font'>Submit</button>
+<p id='result' class='mid-font' style='font-style:italic'></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+$( '#submit' ).click ( function() {
+    var wins = $('#winsPerTen').val();
+
+	$.get( "http://127.0.0.1:1337/api?wins="+ wins, function( data ) {
+		if(data && data.output){
+			var string = data.output.split (',');
+			$('#result').text( "win: " + (100*string[1]).toFixed(2) + "% in " + string[0] + " runs");
+		}
+	});	
+});
+</script>
+</body>
+
+</html>

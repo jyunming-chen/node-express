@@ -1,0 +1,14 @@
+{
+  "name": "caa-node-test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start-win": "node main-win.js",
+    "start-mac": "node main-mac.js",
+    "build": "gcc main.cpp -o main"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "shelljs": "*"
+  }
+}

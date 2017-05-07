@@ -1,0 +1,18 @@
+{
+  "name": "callshellwithserver",
+  "version": "1.0.0",
+  "description": "main.js will run a http server in http://127.0.0.1:1337, and the server will execute main with argv url parameter and send response to the browser.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gcc factorial.cpp",
+    "start-win": "node main-win.js",
+    "start-mac": "node main-mac.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "shelljs": "^0.7.7"
+  }
+}
