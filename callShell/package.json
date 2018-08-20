@@ -1,17 +1,15 @@
 {
   "name": "callshell",
   "version": "1.0.0",
-  "description": "main.js will execute the binary built from factorial.cpp,",
-  "main": "main.js",
+  "description": "main.js will execute the binary built from main.cpp,",
+  "main": "main-ls.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gcc factorial.cpp",
-    "start-mac": "node main-mac.js",
-    "start-win": "node main-win.js"
+    "start": "node main-mac.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "shelljs": "^0.7.7"
+    "shelljs": "^0.8.2"
   }
 }
