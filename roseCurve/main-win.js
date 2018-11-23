@@ -2,6 +2,10 @@ var shelljs = require('shelljs');
 var express = require('express');
 var app = express();
 
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/rose.html');
+});
+
 app.get ('/api', function (req, res) {
 
 	var K = req.query.K;

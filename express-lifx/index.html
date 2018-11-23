@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+</style>
+</head>
+
+<body> 
+<div style="background:pink;width:100vw;height:100vh">
+<button id="lightOn" style="width:40%">Light On</button>
+<button id="lightOff" style="width:40%">Light Off</button>
+<br><br>
+<button id="Red" style="width:40%">Red Light</button>
+<button id="Green" style="width:40%">Green Light</button>
+
+</div>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+$('#lightOn').click ( 
+  function() {
+	$.get( "http://127.0.0.1:3000/turnon", function (res) {
+		console.log (res)
+	});
+  }
+)
+
+$('#lightOff').click ( 
+  function() {
+	$.get( "http://127.0.0.1:3000/turnoff", function (data) {
+		console.log (data)
+	});
+  }
+)
+
+$('#Red').click ( 
+  function() {
+	$.get( "http://127.0.0.1:3000/red", function (data) {
+		console.log (data)
+	});
+  }
+)
+
+$('#Green').click ( 
+  function() {
+	$.get( "http://127.0.0.1:3000/green", function (data) {
+		console.log (data)
+	});
+  }
+)
+
+</script>
+</body>
+
+</html>

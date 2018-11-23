@@ -8,6 +8,10 @@ var app = express();
 localStorage.clear();
 console.log ('LS: ' + localStorage.length);
 
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/game.html');
+});
+
 // routing
 app.get ('/api', function (req, res) {
 
