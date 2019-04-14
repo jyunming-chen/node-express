@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+.center {
+	text-align: center;
+}
+.mid-font {
+	font-size: 1.5em
+}
+</style>
+</head>
+
+<body> 
+<h1 class='center'> Action Prediction </h1>
+<hr>
+<div class='center'>
+
+  <form id='myForm' action="http://localhost:1337/api" method="GET" >
+	<input id='winsPerTen' style='width:80px' class='mid-font' name="wins"> <span class='mid-font'> / 10</span>
+	<br><br>
+	<input type="submit" style="-webkit-appearance:none; font-size:40px" value="Submit">
+  </form>
+
+  <p id='result' class='mid-font' style='font-style:italic'></p>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+ 
+<script>
+$('#myForm').ajaxForm(
+    function (response) {
+		var string = response.output.split (',');
+		$('#result').text( "win: " + (100*string[1]).toFixed(2) + "% in " + string[0] + " runs");
+    		
+    }
+);
+
+</script>
+</body>
+
+</html>
