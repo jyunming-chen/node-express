@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<h1> hello again </h1>
+<h1 id='title'></h1>
+<hr>
+<br>
+<button>test</button>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+
+$(document).ready(function() { // 
+	let name = document.location.search.match(/\?name=(.+)/)[1];
+	$('#title').text ('Hi, ' + name);
+})
+</script>
 </html>
