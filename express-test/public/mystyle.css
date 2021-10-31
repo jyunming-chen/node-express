@@ -1,0 +1,13 @@
+#info {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: #ff0000
+}
+
+body {
+  overflow: hidden;
+}
+
