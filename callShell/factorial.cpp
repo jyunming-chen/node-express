@@ -11,14 +11,12 @@ int factorial(int n)
 
 
 int main(int argc, char *argv[]) {
-	
-	fprintf (stderr, "test");
-	
+		
     if ( argc != 2 ) {
 		fprintf (stdout, "0\n");
 		exit(1);
     }else {
-		fprintf (stdout, "%d", factorial( atoi(argv[1]) ) );
+		printf ( "%d", factorial( atoi(argv[1]) ) );
 		exit(0);
     }
 }

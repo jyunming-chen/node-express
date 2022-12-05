@@ -1,86 +1,114 @@
 <html>
-	<head>
-		<title>Three.js app</title>
-		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
-		</style>
-	</head>
-	<body>
+<head>
+	<title>Three.js app</title>
+</head>
+
+<body>
 		
-
 <div style="margin: 10px;">
-		<input id="num" value="1" style="width:30px;" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> ! 
-		<button id="btn" style="margin: 0 4px;">=</button>
-		<span id="result"></span>
+	<input id="num" value="1" style="width:30px;"> ! 	
+	<button id="btn" style="margin: 0 4px;">=</button>
+	<span id="resultSpan"></span>
 </div>
-<div id="canvas" style="margin-top: 20px; height: 400px; width: 400px; border: solid 1px gray;"></div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div id="container" style="margin-top: 20px; height: 400px; width: 400px; border: solid 1px gray;"></div>
 
-		<script>
-		    var obj = new THREE.Object3D();
-		    var shape;
-		    var max = 5;
-		    var $container = $("#canvas");
-			var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera( 100, $container.width()/$container.height(), 0.1, 1000 );
-			var renderer = new THREE.WebGLRenderer();
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-			renderer.setClearColor( 0xcacaca, 1);
-			$("#canvas").append( renderer.domElement );
-			camera.position.z = 5;
+<script>
 
-			$("#result").text("1");
-			createShape(1);
-			scene.add(obj);
+$('#num').change ( function() {
+   console.log ( $(this).val() ) ; // test & verify
+});
 
-			function createShape (segments){
-				var darkMaterial = new THREE.MeshBasicMaterial( { color: 0xffffcc } );
-				var wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true, transparent: true } ); 
-				wireframeMaterial.wireframeLinewidth = 1;
-				var multiMaterial = [ darkMaterial, wireframeMaterial ]; 
+$("#btn").click(function(){
+	var num = parseInt($("#num").val(), 10);
+	let result = "";
+	var max = 5;
 
-				shape = THREE.SceneUtils.createMultiMaterialObject( 
-				new THREE.SphereGeometry( 2, segments, segments ),
-				multiMaterial );
+	if(num > max) {
+		alert("input too large number! must < "+max);
+		$("#num").val(max);
+		num = max;
+	}
 
-				obj.add(shape);
-			}
+	// Call api: Need to be replaced by a public ip address
+	$.get( "http://127.0.0.1:1337/api?argv="+ num, function( data ) {
+		if(data && data.output){
+			result = parseInt(data.output, 10);
+			$("#resultSpan").text(result);
 
-			$("#btn").click(function(){
-				var num = parseInt($("#num").val(), 10);
-				var result = "";
-				if(num > max) {
-					alert("input too large number! must < "+max);
-					$("#num").val(max);
-					num = max;
-				}
+			obj.remove(shape);
+			createShape(result);
+		}
+	});
+
+
+});
+
+var scene, camera, renderer;
+var obj = new THREE.Object3D();
+var shape;
+var result;
+
+init();
+animate();
+
+function init() {
+	scene = new THREE.Scene();
+	let ww = $('#container').width();
+	let hh = $('#container').height();
+	camera = new THREE.PerspectiveCamera( 100, ww/hh, 1, 1000 );
 	
-				// Call api: Need to be replaced by a public ip address
-				$.get( "http://127.0.0.1:1337/api?argv="+ num, function( data ) {
-					if(data && data.output){
-						result = parseInt(data.output, 10);
-						$("#result").text(result);
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize (ww, hh);
+	
+	renderer.setClearColor( 0xcacaca, 1);
+	$("#container").append( renderer.domElement );
+	camera.position.z = 5;
+	
+	///////////////////////
+	createShape(1);
+	scene.add(obj);
+	$("#resultSpan").text("1");
+	
+}
 
-						obj.remove(shape);
-						createShape(result);
-					}
-				});
+function createShape (segments){
+	var darkMaterial = new THREE.MeshBasicMaterial( { color: 'papayawhip' } );
+	var wireframeMaterial = new THREE.MeshBasicMaterial( 
+	                       { color: 'black', wireframe: true} ); 
+	var multiMaterial = [ darkMaterial, wireframeMaterial ]; 
+
+	shape = createMultiMaterialObject( 
+	  new THREE.SphereGeometry( 2, segments, segments ), multiMaterial );
+
+	obj.add(shape);
+}
+
+//https://github.com/mrdoob/three.js/blob/dev/examples/jsm/utils/SceneUtils.js#L113
+function createMultiMaterialObject( geometry, materials ) {
+
+	const group = new THREE.Group();
+	for ( let i = 0, l = materials.length; i < l; i ++ ) {
+		group.add( new THREE.Mesh( geometry, materials[ i ] ) );
+  }
+	return group;
+
+}
+
+function animate() {
+	requestAnimationFrame( animate );
+
+	obj.rotation.x += 0.01;
+	obj.rotation.y += 0.01;
+
+	renderer.render(scene, camera);
+	
+}
 
 
-			});
 
-			var render = function () {
-				requestAnimationFrame( render );
-
-				obj.rotation.x += 0.01;
-				obj.rotation.y += 0.01;
-
-				renderer.render(scene, camera);
-			};
-
-			render();
-		</script>
-	</body>
+</script>
+</body>
 </html>

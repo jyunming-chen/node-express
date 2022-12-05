@@ -1,4 +1,4 @@
-# node-study callShellWithServerAndThree
+# node-express callShellWithServerAndThree
 
 main.js will run a http server in http://127.0.0.1:1337
 
@@ -8,23 +8,23 @@ main.js will run a http server in http://127.0.0.1:1337
 > npm install
 ```
 
-##### 1. Run Static Server or open local html file directly (serve cube.html)
+##### 1. Run Server or open local html file directly (serve cube.html)
 ```
-> npm run static-server
+> npm run start-mac
 ```
 
-##### 2. Run Api Server (serve api)
+##### 2. In a browser, connect to server by url "localhost:1337"
 ```
-> npm run api-server
+> (route '/' returns cube.html once connnected)
 ```
 
 ### Link: 
 
-http://localhost:8080/cube.html
+http://localhost:1337/cube.html
 
 ### Response
 
-http://localhost:8080/cube.html -> html response: three.js demo
+http://localhost:1337/cube.html -> html response: three.js demo
 
 http://127.0.0.1:1337/api?argv=5 -> json response: {"status":0,"output":"120"}
 
@@ -36,5 +36,3 @@ Because cube.html and api server in different domains, if query api server from 
 Solution: add below two response headers to allow all domains access
  - "Access-Control-Allow-Origin": "*",
  - "Access-Control-Allow-Headers": "Content-Type"
-
- Code:  https://github.com/caa1211/node-study/blob/master/callShellWithServerAndThree_differentDomain/main.js#L61-L62

@@ -15,6 +15,7 @@ var server = app.listen (1337, function() {
 app.get ('/api', function (req, res) {
 	//res.send ('request received');
 	console.log ('url:' + req.url);
+console.log (req.query);
 
 	var argv = req.query.argv; // ("argv");
 	console.log (argv);
