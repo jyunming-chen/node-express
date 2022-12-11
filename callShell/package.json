@@ -1,14 +1,14 @@
 {
-  "name": "express-test",
+  "name": "pp",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "main.js will execute the binary built from main.cpp,",
+  "main": "main-mac.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "shelljs": "^0.8.5"
   }
 }
